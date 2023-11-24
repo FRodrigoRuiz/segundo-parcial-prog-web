@@ -1,0 +1,21 @@
+<form (ngSubmit)="onSubmit()" #nameForm="ngForm">
+  <div>
+    <label for="nameInput">Nombre:</label>
+    <input type="text" id="nameInput" name="name" [(ngModel)]="name" required>
+  </div>
+  <button type="submit" [disabled]="nameForm.invalid">Obtener Información</button>
+</form>
+
+<div *ngIf="genderData">
+  <h2>Género: {{ genderData.gender }}</h2>
+  <p>Probabilidad: {{ genderData.probability }}</p>
+</div>
+
+<div *ngIf="nationalityData">
+  <h2>Posible Nacionalidad</h2>
+  <ul>
+    <li *ngFor="let country of nationalityData.country">
+      {{ country.country_id }} - Probability: {{ country.probability }}
+    </li>
+  </ul>
+</div>
