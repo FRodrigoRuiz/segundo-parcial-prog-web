@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class UsersService {
   private urlApi = "https://jsonplaceholder.typicode.com/users";
 
   login(email: string, lat: string){
-    return this.http.get<any[]>(this.urlApi)
+    return this.http.get<User[]>(this.urlApi)
     .pipe(
-      map((users: any[]) => {
+      map((users: User[]) => {
         const user = users.find(u => u.email === email && u.address.geo.lat === lat);
         return user ? true : false;
       })
