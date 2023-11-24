@@ -1,21 +1,27 @@
-<form (ngSubmit)="onSubmit()" #nameForm="ngForm">
-  <div>
-    <label for="nameInput">Nombre:</label>
-    <input type="text" id="nameInput" name="name" [(ngModel)]="name" required>
+<div class="parent">
+  <div class="mx-auto pt-3" style="width: 18rem;">
+    <form (ngSubmit)="onSubmit()" class="form-inline" #nameForm="ngForm">
+      <div class="form-group col-md-2">
+        <label for="nameInput" class="sr-only" style="width: 18rem;">Ingrese un nombre:</label>
+        <input type="text" class="form-control" style="width: 14rem" id="nameInput" name="name" [(ngModel)]="name" required>
+      </div>
+      <button type="submit" class="btn mb-2 mt-2 boton" [disabled]="nameForm.invalid">Obtener Información</button>
+    </form>
+
+    <div *ngIf="genderData" class="card mt-4" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Género: {{ genderData.gender }}</h5>
+        <p class="card-text">Probabilidad: {{ genderData.probability }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="nationalityData" class="card mt-4" style="width: 18rem;">
+      <div class="card-header">
+        Posible Nacionalidad
+      </div>
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let country of nationalityData.country" class="list-group-item">{{ country.country_id }} - Probability: {{ country.probability }}</li>
+      </ul>
+    </div>
   </div>
-  <button type="submit" [disabled]="nameForm.invalid">Obtener Información</button>
-</form>
-
-<div *ngIf="genderData">
-  <h2>Género: {{ genderData.gender }}</h2>
-  <p>Probabilidad: {{ genderData.probability }}</p>
-</div>
-
-<div *ngIf="nationalityData">
-  <h2>Posible Nacionalidad</h2>
-  <ul>
-    <li *ngFor="let country of nationalityData.country">
-      {{ country.country_id }} - Probability: {{ country.probability }}
-    </li>
-  </ul>
 </div>
